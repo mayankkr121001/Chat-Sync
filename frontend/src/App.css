@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+:root {
+    --primaryColor: #900df8; 
+    --primaryColorHover: #700ac8; 
+    font-weight: bold;
+  }
+
+  body{
+    overflow-x: hidden;
+  }

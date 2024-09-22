@@ -1,0 +1,184 @@
+.homeContainer {
+    width: 100vw;
+    min-height: 100vh;
+    height: fit-content;
+    background-color: rgb(29, 21, 32);
+}
+
+.homeSectionFormName {
+    padding-left: 13%;
+}
+
+.homeSectionOptionsRegisterBtn,
+.homeSectionOptionsLoginBtn {
+    background-color: var(--primaryColor);
+    color: white;
+    border: none;
+    font-size: 16px;
+    width: 160px;
+    padding: 7px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-left: 20px;
+    transition: 0.3s ease;
+
+    &:hover {
+        background-color: var(--primaryColorHover);
+        transition: 0.3s ease;
+    }
+}
+
+.homeSectionContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.homeSectionFormDiv {
+    width: 42%;
+    min-height: 100vh;
+    height: fit-content;
+    background-color: var(--primaryColor);
+    padding: 40px 0px 30px 0px;
+}
+
+
+.homeSectionOptionsImageDiv {
+    width: 58%;
+    padding-top: 40px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.homeSectionOptionsDiv {
+    padding-right: 13%;
+}
+
+.homeSectionImageDiv {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.homeSectionImageDiv img {
+    width: 80%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.homeSectionLoginBtn, .homeSectionRegisterBtn{
+    display: none;
+}
+
+@media screen and (max-width: 1200px) {
+    .homeSectionFormDiv {
+        width: 50%;
+    }
+
+    .homeSectionOptionsImageDiv {
+        width: 50%;
+    }
+
+    .homeSectionFormName {
+        padding-left: 8%;
+    }
+
+    .homeSectionOptionsDiv {
+        padding-right: 8%;
+    }
+
+    .homeSectionImageDiv img {
+        width: 90%;
+    }
+
+    .homeSectionOptionsRegisterBtn,
+    .homeSectionOptionsLoginBtn {
+        width: 140px;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .homeSectionContainer {
+        flex-direction: column;
+    }
+
+    .homeSectionFormDiv {
+        width: 100%;
+    }
+    .homeSectionOptionsImageDiv{
+        display: none;
+    }
+
+    .homeSectionFormName {
+        padding-left: 5%;
+    }
+
+    .homeSectionOptionsDiv {
+        padding-right: 5%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .homeSectionOptionsRegisterBtn,
+    .homeSectionOptionsLoginBtn {
+        margin: 0 10px;
+        display: none;
+    }
+
+    .homeSectionFormNameLoginDiv {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .homeSectionLoginBtn, .homeSectionRegisterBtn {
+        display: block;
+        text-align: center;
+        background-color: black;
+        color: white;
+        border: none;
+        font-size: 14px;
+        width: 140px;
+        padding: 7px 0px;
+        margin-right: 5%;
+        border-radius: 5px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        transition: 0.3s ease;
+
+        &:hover {
+            background-color: rgb(21, 20, 22);
+            transition: 0.3s ease;
+        }
+    }
+
+
+    .homeSectionImageDiv img {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .homeSectionOptionsRegisterBtn,
+    .homeSectionOptionsLoginBtn {
+        width: 120px;
+        font-size: 14px;
+    }
+
+    .homeSectionFormName {
+        font-size: 24px;
+    }
+
+    .homeSectionImageDiv img {
+        width: 95%;
+    }
+}

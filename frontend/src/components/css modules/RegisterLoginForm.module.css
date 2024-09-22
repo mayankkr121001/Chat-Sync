@@ -1,0 +1,122 @@
+.registerForm, .loginForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 15%;
+    margin-top: 50px;
+}
+
+.registerForm h2, .loginForm h2 {
+    letter-spacing: 1px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+.registerForm button, .loginForm button {
+    text-align: center;
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+    width: 160px;
+    padding: 7px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    transition: 0.3s ease;
+
+    &:hover {
+        background-color: rgb(21, 20, 22);
+        transition: 0.3s ease;
+    }
+}
+
+
+.registerFormInputDiv, .loginFormInputDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    position: relative;
+    margin: 10px 0;
+}
+.registerFormInputDiv>input, .loginFormInputDiv>input {
+    width: 100%;
+    padding: 10px;
+    margin: 0px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 5px;
+    letter-spacing: 1px;
+}
+.registerFormInputError, .loginFormInputError {
+    font-size: 13px;
+    color: rgb(121, 8, 8);
+}
+
+.registerFormShowPasswordDiv, .loginFormShowPasswordDiv{
+    position: absolute;
+    right: 9px;
+
+}
+.registerFormShowPassword, .loginFormShowPassword {
+    width: 18px;
+    cursor: pointer;
+}
+
+.loginFormRegisterLink, .registerFormLoginLink {
+    color: rgb(14, 14, 14);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .registerForm, .loginForm {
+        padding: 20px 10%;
+    }
+
+    .registerForm h2, .loginForm h2 {
+        font-size: 22px;
+    }
+
+    .registerFormInputDiv>input, .loginFormInputDiv>input {
+        font-size: 14px;
+    }
+
+    .registerForm button, .loginForm button {
+        width: 150px;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .registerForm, .loginForm {
+        padding: 20px 10%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .registerForm, .loginForm {
+        padding: 20px 5%;
+    }
+
+    .registerForm h2, .loginForm h2 {
+        font-size: 20px;
+    }
+
+    .registerFormInputDiv>input, .loginFormInputDiv>input {
+        font-size: 12px;
+    }
+
+    .registerForm button, .loginForm button {
+        width: 140px;
+        font-size: 14px;
+    }
+}
