@@ -1,0 +1,93 @@
+.storySectionDiv {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding: 0px 9px;
+}
+
+.storySectionStories {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 5px;
+}
+
+.storySectionStories::-webkit-scrollbar {
+    height: 5px;
+}
+
+.storySectionStories::-webkit-scrollbar-track {
+    background-color: var(--secondaryBackgroundColor);
+}
+
+.storySectionStories::-webkit-scrollbar-thumb {
+    background-color: var(--scrollThumbColor);
+    /* background-color: transparent; */
+    border-radius: 10px;
+}
+.storySectionStories::-webkit-scrollbar-thumb:hover{
+    background-color: var(--scrollThumbHoverColor);
+    
+}
+
+@-moz-document url-prefix() {
+    .storySectionStories {
+        /* scrollbar-width: thin; */
+        scrollbar-color: var(--scrollThumbColor) var(--secondaryBackgroundColor);
+    }
+}
+.addStoryDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.addStoryDiv img {
+    width: 72px;
+    margin-right: 7px;
+    transition: transform 0.1s ease-in-out;
+
+    &:hover{
+        transform: scale(0.97);
+        transition: transform 0.1s ease-in-out;
+    }
+}
+
+.storiesDiv {
+    width: fit-content;
+    display: flex;
+    gap: 15px;
+}
+.storyDiv {
+    width: 55px;
+    height: 55px;
+    /* border: 3px solid var(--primaryColor); */
+    /* border: 3px solid #551f5b; */  /* purple for story seen*/
+    border: 3px solid #e84343;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    
+    &:hover{
+        border: 3px solid #b63b3b;
+    }
+}
+
+.storiesDiv img {
+    /* width: 47px; */
+    /* height: 47px; */
+    width: 90%;
+    object-fit: cover;
+}
+
+
+.storySectionLine {
+    width: 90%;
+    margin: 0px auto;
+    height: 1px;
+    background-color: #493c65;
+    border-radius: 10px;
+}

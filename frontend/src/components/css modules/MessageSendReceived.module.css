@@ -1,0 +1,49 @@
+.messageReceivedDiv{
+    width: 55%;
+}
+.messageSendDiv{
+    width: 55%;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.messageReceivedBox, .messageSendBox{
+    width: fit-content;
+    height: fit-content;
+    /* height: 100px; */
+    /* color: #900df8; */
+    color: #bcbcbc;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-color: var(--secondaryBackgroundColor);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 10px 15px;
+    text-align: left;
+}
+.messageReceivedBox img, .messageSendBox img{
+    width: 100%;
+    object-fit: cover;
+}
+.messageSendBox{
+    color: black;
+    /* background-color: #95e4ff; */
+    background-color: #6e6cff;
+    border-top-right-radius: 0px;
+    border-top-left-radius: 20px;
+}
+
+.messageReceivedTime, .messageSendTime{
+    width: 100%;
+    text-align: left;
+    color: #5a5a5a;
+    font-size: 11px;
+    margin-top: 3px;
+}
+.messageSendTime{
+    text-align: right;
+}
+

@@ -1,0 +1,66 @@
+.newChatDiv{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    letter-spacing: 1px;
+}
+.newChatHeader{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #cb3030;
+    
+    &:hover{
+        color: #ab2b2b;
+    }
+}
+.newChatHeaderText{
+    font-size: 20px;
+    font-weight: 600;   
+    color: white;
+}
+
+.newChatSearchInput{
+    width: 100%;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: var(--primaryBackgroundColor);
+    color: white;
+    letter-spacing: 1px;
+}
+
+.newChatSearchedAccountsDiv{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0px;
+    cursor: default;
+}
+.newChatSearchedAccount{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;    
+    padding: 10px;
+    border-radius: 10px;
+    
+    &:hover{
+        background-color: var(--primaryBackgroundColor);
+    }
+}
+.newChatSearchedAccount img{
+    width: 50px;
+    height: 50px;
+}
+.newChatSearchedAccountName{
+    font-size: 16px;
+    color: white;
+}
+
