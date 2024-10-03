@@ -87,6 +87,7 @@
 
 .messageSendFooter{
     width: 100%;
+    /* height: fit-content; */
     padding: 13px 20px;
     display: flex;
     align-items: center;
@@ -105,7 +106,7 @@
 .messageSendBoxInputDiv{
     width: 100%;
 }
-.messageSendBoxInputDiv input{
+.messageSendBoxInputDiv textarea{
     width: 100%;
     border: none;
     outline: none;
@@ -113,15 +114,7 @@
     color: white;
     font-size: 16px;
     letter-spacing: 1px;
-}
-.messageSendBoxMicrophone img{
-    width: 40px;
-    transition: transform 0.2s ease-in-out;
-
-    &:hover{
-        transform: scale(1.07);
-        transition: transform 0.2s ease-in-out;
-    }
+    resize: none;
 }
 .messageSendOptions{
     display: flex;
@@ -163,3 +156,21 @@
         color: #ab2b2b;
     }
 }
+
+
+@media screen and (max-width: 1050px){
+    .messageSendOptions img{
+        width: 30px;
+    }
+    .messageSendOptions img:nth-child(2){
+        width: 25px;
+    }
+    .messageSendOptions img:nth-child(3){
+        background-color: black;
+        padding: 12px;
+        width: 50px;
+        border-radius: 50%;
+    }
+}
+
+

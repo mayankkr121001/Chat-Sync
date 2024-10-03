@@ -3,12 +3,12 @@ import styles from './css modules/NewChat.module.css'
 import profile from '../assets/profile.png'
 import { SquareX } from 'lucide-react'
 
-function NewChat() {
+function NewChat({onNewChatClickFunc}) {
     return (
         <div className={styles.newChatDiv}>
             <div className={styles.newChatHeader}>
                 <p className={styles.newChatHeaderText}>New Chat</p>
-                <p className={styles.newChatHeaderClose}><SquareX /></p>
+                <p className={styles.newChatHeaderClose}><SquareX onClick={onNewChatClickFunc}/></p>
             </div>
             <div className={styles.newChatSearchInputDiv}>
                 <input type="text" placeholder="Search" className={styles.newChatSearchInput} />

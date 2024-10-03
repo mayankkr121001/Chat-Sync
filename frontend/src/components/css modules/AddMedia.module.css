@@ -86,3 +86,24 @@
     }
 }
 
+@media screen and (max-width: 1050px){
+    .addMediaDiv{
+        padding: 10px;
+    }
+    .addMediaHeader{
+        padding: 10px 10px;
+    }
+    .addMediaHeaderText{
+        font-size: 14px;
+        
+    }
+    .addMediaUploadBtn{
+        font-size: 10px;
+    }
+    .addMediaUploadBtn::file-selector-button{
+        padding: 4px 5px;
+        font-size: 12px;
+        margin-right: 5px;
+        margin-left: 20px;
+    }
+}

@@ -37,13 +37,13 @@
 
 .settingsOption{
     color: white;
-    display: flex;
-    align-items: center;
-    gap: 20px;
     margin-top: 20px;
     cursor: default;
 }
 .settingsOption > span{
+    display: flex;
+    align-items: center;
+    gap: 20px;
     color: white;
 
     &:hover{

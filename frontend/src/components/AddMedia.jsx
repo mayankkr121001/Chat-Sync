@@ -4,7 +4,9 @@ import { SquareX } from 'lucide-react';
 import chatVector from '../assets/chatVector.jpg'
 import checkStory from '../assets/checkStory.jpg'
 import testVideo from '../assets/testVideo.mp4'
-function AddMedia() {
+
+
+function AddMedia({onAddMediaClickFunc}) {
     const videoRef = useRef(null);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ function AddMedia() {
       <div className={styles.addMediaHeader}>
         <p className={styles.addMediaHeaderText}>Add Media</p>
         <input type="file" className={styles.addMediaUploadBtn} accept="image/*,video/*"/>
-        <p className={styles.addMediaHeaderClose}><SquareX /></p>
+        <p className={styles.addMediaHeaderClose}><SquareX onClick={onAddMediaClickFunc}/></p>
       </div>
       <div className={styles.addMediaShowArea}>
         <div className={styles.addMediaShowDiv}>

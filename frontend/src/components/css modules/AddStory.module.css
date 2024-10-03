@@ -7,6 +7,7 @@
 .addStoryHeader{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 20px;
 }
 .addStoryHeaderText{
@@ -86,3 +87,26 @@
     }
 }
 
+
+
+@media screen and (max-width: 1050px){
+    .addStoryDiv{
+        padding: 10px;
+    }
+    .addStoryHeader{
+        padding: 10px 10px;
+    }
+    .addStoryHeaderText{
+        font-size: 14px;
+        
+    }
+    .addStoryUploadBtn{
+        font-size: 10px;
+    }
+    .addStoryUploadBtn::file-selector-button{
+        padding: 4px 5px;
+        font-size: 12px;
+        margin-right: 5px;
+        margin-left: 20px;
+    }
+}

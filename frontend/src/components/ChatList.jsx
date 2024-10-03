@@ -3,13 +3,13 @@ import styles from './css modules/ChatList.module.css'
 import addContactIcon from '../assets/addContact.png'
 import profilePic from '../assets/profile.png'
 
-function ChatList() {
+function ChatList({onNewChatClickFunc}) {
     return (
         <div className={styles.chatListContainer}>
             <div className={styles.chatListHeader}>
                 <div className={styles.chatListHeaderText}>Chats</div>
                 <div className={styles.chatListAddIcons}>
-                    <img src={addContactIcon} alt="contact" />
+                    <img src={addContactIcon} alt="contact" onClick={onNewChatClickFunc}/>
                 </div>
             </div>
             <div className={styles.chatListSearchDiv}>

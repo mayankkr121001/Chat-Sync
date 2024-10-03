@@ -12,6 +12,36 @@
         color: #ab2b2b;
     }
 }
+.changeProfilePicUploadBtnDiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.changeProfilePicUploadBtn{
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 90%;
+}
+.changeProfilePicUploadBtn::file-selector-button{
+    background-color: white;
+    border: none;
+    padding: 7px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-right: 10px;
+    transition: 0.2s ease-in-out;
+
+}
+.changeProfilePicUploadBtn::file-selector-button:hover{
+    background-color: #e2e2e2;
+    transition: 0.2s ease-in-out;
+}
 .changeProfilePicArea{
     width: 100%;
     margin-top: 15px;
@@ -42,5 +72,15 @@
     &:hover{
         background-color: rgb(10, 10, 10);
         transition: 0.2s ease-in-out;
+    }
+}
+
+@media screen and (max-width: 1050px){
+    .changeProfilePicUploadBtn::file-selector-button{
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        margin-right: 10px;
+    
     }
 }
