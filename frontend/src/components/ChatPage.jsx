@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useQueryClient } from 'react-query'
 import styles from './css modules/ChatPage.module.css'
 import defaultProfileImage from '../assets/profile.png'
 import settingsIcon from '../assets/settings.png'
@@ -25,6 +26,7 @@ function ChatPage() {
     const [addMediaOpen, setAddMediaOpen] = useState(false)
 
     const [mobileView, setMobileView] = useState(false)
+
 
     useEffect(() => {
         if (window.innerWidth < 750) {

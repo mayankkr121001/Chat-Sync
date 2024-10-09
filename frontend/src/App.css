@@ -8,10 +8,10 @@
     --primaryColor: #670df8; 
     --primaryColorHover: #4c0ac8; 
     --primaryBackgroundColor: #1a1520; 
-    --secondaryBackgroundColor: #282137; 
+    --secondaryBackgroundColor: #242137; 
     --scrollTrackColor: var(--secondaryBackgroundColor);
-    --scrollThumbColor: #493c65;
-    --scrollThumbHoverColor: #5b4c7d;
+    --scrollThumbColor: #3f3c65;
+    --scrollThumbHoverColor: #4c4d7d;
 
     font-weight: bold;
   }

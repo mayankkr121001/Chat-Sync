@@ -4,8 +4,18 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    padding: 20px 15%;
+    padding: 5px 15%;
     margin-top: 50px;
+}
+.registerFormMessage, .loginFormMessage{
+    color: rgb(242, 255, 242);
+    letter-spacing: 1px;
+    font-size: 20px;
+}
+.registerFormError, .loginFormError{
+    color: rgb(159, 3, 0);
+    letter-spacing: 1px;
+    font-size: 20px;
 }
 
 .registerForm h2, .loginForm h2 {
