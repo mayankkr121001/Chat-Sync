@@ -2,7 +2,10 @@ import axios from "axios";
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_API_BASE_URL,
-    withCredentials: true
+    withCredentials: true,
+    // headers: {
+    //     'Content-Type': 'application/json'
+    //   }
 })
 
 api.interceptors.response.use(response => response, 
@@ -14,7 +17,7 @@ api.interceptors.response.use(response => response,
             return Promise.reject(error);
         } 
 
-        console.log(error);
+        // console.log(error);
         if(error && !originalRequest._retry){
             originalRequest._retry = true;
 

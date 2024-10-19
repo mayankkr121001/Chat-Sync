@@ -63,23 +63,28 @@
 .storyDiv {
     width: 55px;
     height: 55px;
-    /* border: 3px solid var(--primaryColor); */
-    /* border: 3px solid #551f5b; */  /* purple for story seen*/
-    border: 3px solid #e84343;
-    border-radius: 50%; 
     display: flex;
     align-items: center;
     justify-content: center;   
+}
+.storyNotSeen{
+    border: 3px solid #e84343;
+    border-radius: 50%;
     
-    &:hover{
+    &:hover {
         border: 3px solid #b63b3b;
     }
+}
+.storySeen{
+    border: 3px solid #362a74;
+    border-radius: 50%;
 }
 
 .storiesDiv img {
     /* width: 47px; */
     /* height: 47px; */
     width: 90%;
+    border-radius: 50%;
     object-fit: cover;
 }
 

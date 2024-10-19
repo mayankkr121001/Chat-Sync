@@ -22,6 +22,13 @@ const userSchema = new mongoose.Schema(
         story:{
             type: String
         },
+        storyCreatedTime:{
+            type: Date
+        },
+        storySeen:{
+            type: Boolean,
+            default: false
+        },
         isVerified: {
             type: Boolean,
             default : false

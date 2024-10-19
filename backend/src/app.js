@@ -1,9 +1,9 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import http from 'http'
-import {Server} from 'socket.io'
 import UserRouter from './routes/user.route.js'
+import ChatRoomRouter from './routes/chatRoom.route.js'
+import "../src/utils/cron/storySchedule.js"
 
 const app = express()
 
@@ -13,14 +13,12 @@ app.use(cors({
 }))
 
 app.use(cookieParser())
-app.use(express.json({limit: "16kb"}))
-app.use(express.urlencoded({extended: true}))
+app.use(express.json({ limit: "16kb" }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
 
 
-const server = http.createServer(app);
-const io = new Server(server)
-
 app.use('/api/v1/user', UserRouter)
+app.use('/api/v1/chatRoom', ChatRoomRouter)
 
-export {app, server} 
+export { app } 

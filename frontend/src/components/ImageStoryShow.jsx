@@ -5,7 +5,7 @@ import chatVector from '../assets/chatVector.jpg'
 import checkStory from '../assets/checkStory.jpg'
 import testVideo from '../assets/testVideo.mp4'
 
-function ImageStoryShow() {
+function ImageStoryShow({user, onImgStoryClose}) {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -15,20 +15,28 @@ function ImageStoryShow() {
   }, []);
 
 
+  let isImage;
+  let isVideo;
+
+  if(user.story){
+    isImage = user?.story.match(/\.(jpeg|jpg|gif|png|webp)$/i);
+    isVideo = user?.story.match(/\.(mp4|webm|ogg)$/i);
+  }
+
+
   return (
     <div className={styles.imageStoryDiv}>
       <div className={styles.imageStoryHeader}>
-        <p className={styles.imageStoryHeaderText}>Image Story</p>
-        <p className={styles.imageStoryHeaderClose}><SquareX /></p>
+        {/* <p className={styles.imageStoryHeaderText}>Image Story</p> */}
+        <p className={styles.imageStoryHeaderClose}><SquareX onClick={onImgStoryClose} /></p>
       </div>
       <div className={styles.imageStoryShowArea}>
         <div className={styles.imageStoryShowDiv}>
-          {/* <img src={chatVector} alt="image" /> */}
-          <img src={checkStory} alt="image" />
-          {/* <video ref={videoRef} autoPlay muted controls loop>
-            <source src={testVideo} type="video/mp4" />
+          {isImage && <img src={user.story} alt="image" />}
+          {isVideo && <video ref={videoRef} autoPlay muted controls loop>
+            <source src={user.story} type="video/mp4" />
             Your browser does not support the video tag.
-          </video> */}
+          </video>}
         </div>
       </div>
     </div>

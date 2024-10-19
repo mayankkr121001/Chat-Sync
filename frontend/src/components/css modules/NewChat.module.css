@@ -42,6 +42,28 @@
     gap: 10px;
     padding: 10px 0px;
     cursor: default;
+    height: calc(100vh - 230px);
+    overflow-y: auto;
+    scroll-behavior: smooth ;
+}
+.newChatSearchedAccountsDiv::-webkit-scrollbar{
+    width: 5px;
+}
+.newChatSearchedAccountsDiv::-webkit-scrollbar-track{
+    background-color: var(--secondaryBackgroundColor);
+}
+.newChatSearchedAccountsDiv::-webkit-scrollbar-thumb{
+    background-color: var(--scrollThumbColor);
+    border-radius: 10px;
+}
+.newChatSearchedAccountsDiv::-webkit-scrollbar-thumb:hover{
+    background-color: var(--scrollThumbHoverColor);
+}
+@-moz-document url-prefix() {
+    .newChatSearchedAccountsDiv {
+        /* scrollbar-width: thin; */
+        scrollbar-color: var(--scrollThumbColor) var(--secondaryBackgroundColor);
+    }
 }
 .newChatSearchedAccount{
     width: 100%;
@@ -58,6 +80,7 @@
 .newChatSearchedAccount img{
     width: 50px;
     height: 50px;
+    border-radius: 50%;
 }
 .newChatSearchedAccountName{
     font-size: 16px;

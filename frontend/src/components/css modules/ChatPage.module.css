@@ -6,8 +6,8 @@
     background-color: var(--primaryBackgroundColor);
     display: flex;
 
-    /* overflow-y: hidden;
-    overflow-x: hidden; */
+     /* overflow-y: hidden; */
+    /*overflow-x: hidden; */
 }
 
 .chatSidebarDiv {
@@ -54,20 +54,27 @@
     width: 70px;
     height: 70px;
     margin-top: 50px;
-    border: 3px solid #e84343;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-
+}
+.profileStoryNotSeen{
+    border: 3px solid #e84343;
+    border-radius: 50%;
+    
     &:hover {
         border: 3px solid #b63b3b;
     }
+}
+.profileStorySeen{
+    border: 3px solid #362a74;
+    border-radius: 50%;
 }
 
 .chatProfileImageDiv img {
     width: 90%;
     height: 90%;
+    border-radius: 50%;
     object-fit: cover;
 }
 
@@ -117,7 +124,7 @@
     height: 100vh;
     background-color: var(--primaryBackgroundColor);
 
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     overflow-x: hidden;
 
 }
@@ -133,8 +140,6 @@
 .chatMobileProfileImageDiv {
     width: 60px;
     height: 60px;
-    border: 3px solid #e84343;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,6 +148,7 @@
 .chatMobileProfileImageDiv img {
     width: 90%;
     height: 90%;
+    border-radius: 50%;
     object-fit: cover;
 }
 

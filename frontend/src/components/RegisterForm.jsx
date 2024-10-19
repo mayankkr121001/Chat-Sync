@@ -4,7 +4,6 @@ import api from '../interceptors/axios.js'
 import {Riple} from "react-loading-indicators"
 import showPassword from '../assets/showPassword.png';
 import styles from './css modules/RegisterLoginForm.module.css'
-import GoogleFacebookLogin from './GoogleFacebookLogin'
 
 
 function RegisterForm({toLoginFunc}) {
@@ -55,12 +54,12 @@ function RegisterForm({toLoginFunc}) {
     }
 
     const registerMutation = useMutation({
-        mutationFn: (newData) => {
-            return api.post("/user/register", newData)
+        mutationFn: async (newData) => {
+            return await api.post("/user/register", newData)
         }, 
         onSuccess: (response)=> {
             // console.log(data);
-            setMessage(response.data.message + ". Please Verify your email.");
+            setMessage(response.data.message + ". Please Verify your email before login .");
             setTimeout(()=>{
                 setMessage("");
             }, 3000);
@@ -123,7 +122,6 @@ function RegisterForm({toLoginFunc}) {
                 <button type="submit">Register</button>
                 <p>Already have an account? <span onClick={toLoginFunc} className={styles.registerFormLoginLink}>Login</span></p>
             </form>
-            <GoogleFacebookLogin />
         </div>
     )
 }

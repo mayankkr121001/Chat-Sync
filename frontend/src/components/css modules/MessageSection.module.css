@@ -12,11 +12,17 @@
     padding: 16px 25px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
     background-color: var(--secondaryBackgroundColor);
     /* background-color: transparent; */
     backdrop-filter: blur(10px);
     border-top-left-radius: 50px;
+}
+.messageHeaderUserInfo{
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 .messageHeaderProfileText{
     text-align: left;
@@ -39,6 +45,14 @@
 .messageHeaderProfilePic img{
     width: 50px;
     height: 50px;
+    border-radius: 50%;
+}
+.messageSectonCloseBtn{
+    color: #cb3030;
+    
+    &:hover{
+        color: #ab2b2b;
+    }
 }
 
 .messagesDiv{
@@ -47,6 +61,7 @@
     padding: 20px 10px;
     overflow-y: auto;
     scroll-behavior: smooth;
+    background-color: var(--primaryBackgroundColor);
 }
 .messagesDiv::-webkit-scrollbar{
     width: 5px;
@@ -66,7 +81,20 @@
         scrollbar-color: var(--scrollThumbColor) var(--primaryBackgroundColor);
     }
 }
-
+/* .messagesDivNotification{
+    width: 100%;
+    text-align: center;
+    margin: 20px 0px;
+}
+.messagesDivNotification p{
+    color: black;
+    letter-spacing: 1px;
+    font-size: 14px;
+    display: inline-block;
+    background-color: #555555;
+    border-radius: 10px;
+    padding: 1px 15px;
+} */
 .messageReceivedContainer{
     width: 100%;
     height: fit-content;
@@ -170,6 +198,14 @@
         padding: 12px;
         width: 50px;
         border-radius: 50%;
+    }
+}
+@media screen and (max-width: 750px){
+    .messageHeader{
+        border-top-left-radius: 0px;
+    }
+    .messageSendFooter{
+        border-bottom-left-radius: 0px;
     }
 }
 

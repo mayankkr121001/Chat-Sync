@@ -6,7 +6,7 @@ import checkStory from '../assets/checkStory.jpg'
 import testVideo from '../assets/testVideo.mp4'
 
 
-function AddMedia({onAddMediaClickFunc}) {
+function AddMedia({onAddMediaClose}) {
     const videoRef = useRef(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function AddMedia({onAddMediaClickFunc}) {
       <div className={styles.addMediaHeader}>
         <p className={styles.addMediaHeaderText}>Add Media</p>
         <input type="file" className={styles.addMediaUploadBtn} accept="image/*,video/*"/>
-        <p className={styles.addMediaHeaderClose}><SquareX onClick={onAddMediaClickFunc}/></p>
+        <p className={styles.addMediaHeaderClose}><SquareX onClick={onAddMediaClose}/></p>
       </div>
       <div className={styles.addMediaShowArea}>
         <div className={styles.addMediaShowDiv}>

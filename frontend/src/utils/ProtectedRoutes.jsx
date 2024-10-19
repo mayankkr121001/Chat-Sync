@@ -13,8 +13,7 @@ function ProtectedRoutes() {
             //  console.log(res.data);
             return res.data;
 
-        },
-        retry: false
+        }
     })
 
 
@@ -25,7 +24,7 @@ function ProtectedRoutes() {
         )
     }
     if (error) {
-        console.log(error);
+        // console.log(error);
         return <Navigate to='/' replace={true} />
     }
 

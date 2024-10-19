@@ -1,18 +1,49 @@
 import React from 'react'
 import styles from './css modules/storySection.module.css'
 import addStory from '../assets/addStory.png'
+import api from '../interceptors/axios.js'
+import { useQuery } from 'react-query'
 import profilePic from '../assets/profile.png'
 
-function StorySection({onAddStoryClickFunc}) {
+function StorySection({ onAddStoryClickFunc, onImgStoryClick }) {
+
+    const { error, data: usersWithStory } = useQuery({
+        queryKey: ['usersWithStory'],
+        queryFn: async () => {
+            const res = await api.get('/user/usersStories');
+            // console.log(res.data.usersWithStories);
+            return res.data.usersWithStories
+        }
+    })
+    if(error){
+        console.log(error); 
+    }
+
+    const onOtherStoryClick = (user)=>{
+        // console.log(user);
+        
+        onImgStoryClick(user)
+    }
+
+
     return (
         <div className={styles.storyContainer}>
             <div className={styles.storySectionDiv}>
                 <div className={styles.storySectionStories}>
                     <div className={styles.addStoryDiv}>
-                        <img src={addStory} alt="addStory" onClick={onAddStoryClickFunc}/>
+                        <img src={addStory} alt="addStory" onClick={onAddStoryClickFunc} />
                     </div>
                     <div className={styles.storiesDiv}>
-                        <div className={styles.storyDiv}>
+                        {usersWithStory && usersWithStory.map((elem, index) => (
+                            <div key={index} className={`${styles.storyDiv}`}>
+                                {elem.profileImage ? <img onClick={() => onOtherStoryClick(elem)} src={elem.profileImage} alt="profilePic" />:
+                                <img onClick={() => onOtherStoryClick(elem)} src={profilePic} alt="profilePic" />}
+                            </div>
+                        ))}
+                        {/* <div className={`${styles.storyDiv} ${styles.storyNotSeen}`}>
+                            <img src={profilePic} alt="profilePic" />
+                        </div>
+                        <div className={`${styles.storyDiv} ${styles.storySeen}`}>
                             <img src={profilePic} alt="profilePic" />
                         </div>
                         <div className={styles.storyDiv}>
@@ -26,10 +57,7 @@ function StorySection({onAddStoryClickFunc}) {
                         </div>
                         <div className={styles.storyDiv}>
                             <img src={profilePic} alt="profilePic" />
-                        </div>
-                        <div className={styles.storyDiv}>
-                            <img src={profilePic} alt="profilePic" />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

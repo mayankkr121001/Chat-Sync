@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import {Riple} from "react-loading-indicators"
 import showPassword from '../assets/showPassword.png';
 import styles from './css modules/RegisterLoginForm.module.css'
-import GoogleFacebookLogin from './GoogleFacebookLogin'
 
 
 function LoginForm({ toRegisterFunc }) {
@@ -52,8 +51,8 @@ function LoginForm({ toRegisterFunc }) {
 
     const navigate = useNavigate();
     const loginMutation = useMutation({
-        mutationFn: (newData) => {
-            return api.post('/user/login', newData)
+        mutationFn: async (newData) => {
+            return await api.post('/user/login', newData)
         },
         onSuccess: (response) => {
             setMessage(response.data.message);
@@ -113,7 +112,6 @@ function LoginForm({ toRegisterFunc }) {
                 <button type="submit">Login</button>
                 <p>Don't have an account? <span onClick={toRegisterFunc} className={styles.loginFormRegisterLink}>Register</span></p>
             </form>
-            <GoogleFacebookLogin />
         </div>
     )
 
