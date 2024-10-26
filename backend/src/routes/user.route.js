@@ -12,6 +12,7 @@ import {
     deleteProfileImage,
     updateName,
     addStory,
+    deleteStory,
     storySeen,
     getStoriesfromOthers,
     getAllUsers
@@ -30,6 +31,7 @@ router.route('/uploadProfileImage').post(verifyJWT, upload.single('profileImage'
 router.route('/deleteProfileImage').delete(verifyJWT, deleteProfileImage)
 router.route('/updateName').put(verifyJWT, updateName)
 router.route('/addStory').post(verifyJWT, upload.single('story'), addStory)
+router.route('/deleteStory').delete(verifyJWT, deleteStory)
 router.route('/storySeen').put(verifyJWT, storySeen)
 router.route('/usersStories').get(verifyJWT, getStoriesfromOthers)
 router.route('/getAllUsers').get(verifyJWT, getAllUsers)

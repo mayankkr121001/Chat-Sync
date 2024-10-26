@@ -98,6 +98,10 @@
         background-color: var(--primaryBackgroundColor);
     }
 }
+.chatListOpenUser{
+    background-color: var(--primaryBackgroundColor);
+    border-radius: 10px;
+}
 .chatListProfilePic{
     display: flex;
     align-items: center;

@@ -55,6 +55,9 @@ function ChatPage() {
                 // storyDivRef.current?.classList.add(styles.profileStoryNotSeen)
                 storyDivRef.current?.classList.add(styles.profileStorySeen)
             }
+            else if(!data.story){
+                storyDivRef.current?.classList.remove(styles.profileStorySeen)
+            }
             // else if (data?.story && data?.storySeen === true) {
             //     storyDivRef.current?.classList.remove(styles.profileStoryNotSeen)
             //     storyDivRef.current?.classList.add(styles.profileStorySeen)
@@ -94,7 +97,7 @@ function ChatPage() {
 
     useEffect(() => {
         socket.on("connect", () => {
-            console.log("Connected", socket.id);
+            // console.log("Connected", socket.id);
         })
  
         return ()=>{
@@ -229,6 +232,8 @@ function ChatPage() {
         if (window.innerWidth < 750) {
             setChatListOpen(true)
         }
+        queryClient.invalidateQueries("connectedUsers")
+        
         setMessageSectionOpen(false)
     }
 
@@ -341,7 +346,7 @@ function ChatPage() {
                             </div>
                             <div className={styles.chatMobileSectionsComponents}>
                                 {chatListOpen && <ChatList onNewChatClickFunc={onNewChatClickFunc} onMessageSectionOpen={onMessageSectionOpen}/>}
-                                {settingsOpen && <Settings onSettingsClickFunc={onSettingsClose} onProfileClickFunc={onProfileClickFunc} />}
+                                {settingsOpen && <Settings onSettingsClose={onSettingsClose} onProfileClickFunc={onProfileClickFunc} />}
                                 {profileOpen && <Profile onProfileClose={onProfileClose} onChangeProfilePicClickFunc={onChangeProfilePicClickFunc} />}
                                 {changeProfilePicOpen && <ChangeProfilePic onChangeProfilePicClose={onChangeProfilePicClose} />}
                                 {newChatOpen && <NewChat onNewChatClose={onNewChatClose} onMessageSectionOpen={onMessageSectionOpen} />}

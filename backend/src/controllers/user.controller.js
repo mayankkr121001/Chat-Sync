@@ -232,18 +232,6 @@ const authorizedUser = async (req, res) => {
 
 const uploadProfileImage = async (req, res) => {
     try {
-        const profileImageLocalPath = req.file?.path;
-
-        if (!profileImageLocalPath) {
-            return res.status(400).json({ error: "Profile image is missing !" });
-        }
-
-        const profileImage = await uploadOnCloudinary(profileImageLocalPath);
-
-        if (!profileImage.url) {
-            return res.status(400).json({ error: "Error while uploading profile image !" });
-        }
-
         const user = await User.findById(req.user?._id);
 
         if (!user) {
@@ -255,15 +243,23 @@ const uploadProfileImage = async (req, res) => {
             await deleteFromCloudinary(publicId);
         }
 
+        const profileImageLocalPath = req.file?.path;
 
-        await User.findByIdAndUpdate(
-            req.user?._id,
-            {
-                $set: {
-                    profileImage: profileImage.url
-                }
-            }, { new: true }
-        )
+        if (!profileImageLocalPath) {
+            return res.status(400).json({ error: "Profile image is missing !" });
+        }
+
+        const profileImageCloudinary = await uploadOnCloudinary(profileImageLocalPath);
+        console.log(profileImageCloudinary);
+        
+
+        if (!profileImageCloudinary.url) {
+            return res.status(400).json({ error: "Error while uploading profile image !" })
+        }
+
+
+        user.profileImage = profileImageCloudinary.url
+        user.save()
 
 
         return res.status(200).json({
@@ -384,6 +380,41 @@ const addStory = async (req, res)=>{
     }
 }
 
+const deleteStory = async (req, res)=>{
+    try {
+        const user = await User.findById(req.user?._id);
+        if(!user){
+            return res.status(400).json({ error: "User not found !" });
+        }
+
+        if (user.story) {
+            const publicId = user.story.split('/').pop().split('.')[0];
+            await deleteFromCloudinary(publicId);
+        }
+
+        await User.findByIdAndUpdate(
+            req.user?._id,
+            {
+                $unset: {
+                    story: 1,
+                    storyCreatedTime: 1
+                },
+                $set: {
+                    storySeen: false
+                }
+            }
+        );
+
+        return res.status(200).json({
+            message: "Story deleted successfully."
+        })
+        
+        
+    } catch (error) {
+        return res.status(500).json({ error: "catch error", message: error.message })
+    }
+}
+
 const storySeen = async(req,res)=>{
     try {
         const user = await User.findById(req.user?._id);
@@ -458,6 +489,7 @@ export {
     deleteProfileImage,
     updateName,
     addStory,
+    deleteStory,
     storySeen,
     getStoriesfromOthers,
     getAllUsers
