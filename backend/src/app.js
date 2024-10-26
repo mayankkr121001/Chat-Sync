@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import UserRouter from './routes/user.route.js'
 import ChatRoomRouter from './routes/chatRoom.route.js'
+import messageRouter from './routes/message.route.js'
 import "../src/utils/cron/storySchedule.js"
 
 const app = express()
@@ -20,5 +21,6 @@ app.use(express.static("public"))
 
 app.use('/api/v1/user', UserRouter)
 app.use('/api/v1/chatRoom', ChatRoomRouter)
+app.use('/api/v1/message', messageRouter)
 
 export { app } 

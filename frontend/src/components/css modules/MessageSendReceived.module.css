@@ -1,5 +1,24 @@
+
+
+.messageReceivedContainer{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+.messageSendContainer{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
 .messageReceivedDiv{
     width: 55%;
+    margin-bottom: 4px;
 }
 .messageSendDiv{
     width: 55%;
@@ -7,6 +26,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin-bottom: 4px;
+
 }
 
 .messageReceivedBox, .messageSendBox{
@@ -24,10 +45,14 @@
     padding: 10px 15px;
     text-align: left;
 }
+
 .messageReceivedBox img, .messageSendBox img{
     width: 100%;
     object-fit: cover;
 }
+/* .messageReceivedBox audio, .messageSendBox audio{
+     max-width: 100%; 
+} */
 .messageSendBox{
     color: black;
     /* background-color: #95e4ff; */
@@ -40,7 +65,7 @@
     width: 100%;
     text-align: left;
     color: #5a5a5a;
-    font-size: 11px;
+    font-size: 9px;
     margin-top: 3px;
 }
 .messageSendTime{

@@ -1,5 +1,6 @@
 import cron from 'node-cron'
 import { User } from '../../models/user.model.js'
+import {deleteFromCloudinary} from '../cloudinary.js'
 
 cron.schedule('0 * * * *', async () => {
     const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -9,8 +10,8 @@ cron.schedule('0 * * * *', async () => {
         )
 
         for (const user of userWithExpiredStoryFind) {
-            if (user.story) {
-                const publicId = user.story.split('/').pop().split('.')[0];
+            if (user?.story) {
+                const publicId = user?.story.split('/').pop().split('.')[0];
                 await deleteFromCloudinary(publicId);
             }
         }

@@ -35,7 +35,7 @@ function StorySection({ onAddStoryClickFunc, onImgStoryClick }) {
                     </div>
                     <div className={styles.storiesDiv}>
                         {usersWithStory && usersWithStory.map((elem, index) => (
-                            <div key={index} className={`${styles.storyDiv}`}>
+                            <div key={index} className={`${styles.storyDiv} ${styles.storySeen}`}>
                                 {elem.profileImage ? <img onClick={() => onOtherStoryClick(elem)} src={elem.profileImage} alt="profilePic" />:
                                 <img onClick={() => onOtherStoryClick(elem)} src={profilePic} alt="profilePic" />}
                             </div>

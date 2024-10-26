@@ -347,6 +347,8 @@ const updateName = async(req, res)=>{
 const addStory = async (req, res)=>{
     try {
         const storyLocalPath = req.file?.path;
+        // console.log(req.file?.path);
+        
 
         if(!storyLocalPath){
             return res.status(400).json({ error: "Story is missing !" });

@@ -1,5 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styles from './css modules/MessageSection.module.css'
+import api from '../interceptors/axios.js';
+import { useQuery, useQueryClient } from 'react-query';
 import EmojiPicker from 'emoji-picker-react';
 import { AudioRecorder } from 'react-audio-voice-recorder';
 import { Trash2, SquareX } from 'lucide-react';
@@ -10,12 +12,40 @@ import attachIcon from '../assets/attach.png'
 import emojiIcon from '../assets/emojiIcon.png'
 import MessageReceived from './MessageReceived.jsx'
 import MessageSend from './MessageSend.jsx'
+import { socket } from '../socket/socket.js';
+import { Riple } from "react-loading-indicators"
 
-function MessageSection({userForMessage, onMessageSectionClose, onAddMediaClickFunc }) {
+
+function MessageSection({ userForMessage, onMessageSectionClose, onAddMediaClickFunc }) {
   const [textInput, setTextInput] = useState('');
-  const [audio, setAudio] = useState(null);
+  const [media, setMedia] = useState('')
+  const [audio, setAudio] = useState('');
   const [recordingComplete, setRecordingComplete] = useState(false);
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
+
+  const lastMessageRef = useRef(null)
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    socket.on('receiveMessage', (data) => {
+      const { message, senderId, chatRoomId } = data;
+      // console.log(message);
+
+      queryClient.invalidateQueries(['chats', chatRoomId])
+
+    })
+    socket.on('file-receive', (data) => {
+      const { message, senderId, chatRoomId } = data;
+      // console.log(message);
+
+      queryClient.invalidateQueries(['chats', chatRoomId])
+
+    })
+    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
+  })
+
+
 
   const textInputRef = useRef(null);
   const onTextInputChange = (e) => {
@@ -34,7 +64,9 @@ function MessageSection({userForMessage, onMessageSectionClose, onAddMediaClickF
 
   const addAudioElement = (audio) => {
     const audioUrl = URL.createObjectURL(audio);
-    // console.log(url);
+    // console.log(audio);
+    setMedia(audio);
+    // console.log(audioUrl);
     setAudio(audioUrl)
     setRecordingComplete(true);
   }
@@ -47,13 +79,78 @@ function MessageSection({userForMessage, onMessageSectionClose, onAddMediaClickF
     setTextInput((prev) => prev + emojiData.emoji);
   }
 
+  // GET CHAT ROOM
+  const otherUserId = userForMessage._id;
+  // console.log(otherUserId);
+
+  const { data: chatRoom } = useQuery({
+    queryKey: ['chatRoom', otherUserId],
+    queryFn: async () => {
+      const res = await api.get('chatRoom/getRoom', {
+        params: { otherUserId }
+      })
+      // console.log(res.data.chatRoom[0]._id);
+      return res.data.chatRoom[0]
+    }
+  })
+
+  const chatRoomId = chatRoom?._id;
+
+  const { isLoading, data: chats } = useQuery({
+    queryKey: ['chats', chatRoomId],
+    queryFn: async () => {
+      const res = await api.get('/message/getChats', {
+        params: { chatRoomId: chatRoomId }
+      })
+      // console.log(res.data.messagesReceived);
+      return res.data
+    },
+    enabled: !!chatRoomId,
+
+  })
+
+  
+
+  const userId = queryClient.getQueryData('currUser')._id;
+
+  const OnSendBtnClick = () => {
+    if (media) {
+      // console.log(media);
+      socket.emit('file-send', {
+        file: media,
+        filename: media.name,
+        type: "audio",
+        userId,
+        chatRoomId
+      })
+
+      onAudioDeleteBtnClick();
+    }
+    else {
+      socket.emit('sendMessage', { textInput, type: "text", userId, chatRoomId });
+    }
+
+    queryClient.invalidateQueries(['chats', chatRoomId])
+
+    setEmojiPickerOpen(false)
+    setTextInput('');
+  }
+
+  const onAudioDeleteBtnClick = () => {
+    setRecordingComplete(false)
+    setMedia('')
+    setAudio('')
+  }
+
+
+
 
   return (
     <div className={styles.messageContainer}>
       <div className={styles.messageHeader}>
         <div className={styles.messageHeaderUserInfo}>
           <div className={styles.messageHeaderProfilePic}>
-            {userForMessage?.profileImage ? <img src={userForMessage?.profileImage} alt="profile" />: <img src={profilePic} alt="profile" />}
+            {userForMessage?.profileImage ? <img src={userForMessage?.profileImage} alt="profile" /> : <img src={profilePic} alt="profile" />}
           </div>
           <div className={styles.messageHeaderProfileText}>
             <div className={styles.messageHeaderProfileName}>{userForMessage?.name}</div>
@@ -63,18 +160,19 @@ function MessageSection({userForMessage, onMessageSectionClose, onAddMediaClickF
         <p className={styles.messageSectonCloseBtn}><SquareX onClick={onMessageSectionClose} /></p>
       </div>
       <div className={styles.messagesDiv}>
-        <div className={styles.messageReceivedContainer}>
-          <MessageReceived text="This is a test message Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus atque harum facere esse quo iste autem rem obcaecati, expedita labore!" />
-          <MessageReceived text="This is a test message Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-          <MessageReceived text="This is a test message" />
-          <MessageReceived text="This is a test message" />
-        </div>
-        <div className={styles.messageSendContainer}>
-          <MessageSend text="This is a test message Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus atque harum facere esse quo iste autem rem obcaecati, expedita labore!" />
-          <MessageSend text="This is a test message Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-          <MessageSend text="This is a test message Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-          <MessageSend text="This is a test message" />
-        </div>
+        {isLoading && <div style={{ textAlign: 'center', marginTop: '20px  ' }}>
+          <Riple color="white" size="small" text="" textColor="#ffd7d7" />
+        </div>}
+
+
+        {chats?.allChats && chats.allChats.map((msg, index) => (
+          <div key={index} ref={index === chats.allChats.length - 1 ? lastMessageRef : null}>
+            {(msg.sender !== userId) && <MessageReceived content={msg.content} type={msg.type} time={msg.createdAt} />}
+            {(msg.sender === userId) && <MessageSend content={msg.content} type={msg.type} time={msg.createdAt} />}
+          </div>
+        ))}
+
+
       </div>
       {emojiPickerOpen && <div className={styles.messageEmojiPickerDiv}>
         <EmojiPicker onEmojiClick={onEmojiClick} />
@@ -99,14 +197,14 @@ function MessageSection({userForMessage, onMessageSectionClose, onAddMediaClickF
           {(recordingComplete) && <div className={styles.messageSendBoxAudio}>
             <audio src={audio} controls />
             <span >
-              <Trash2 onClick={() => setRecordingComplete(false)} />
+              <Trash2 onClick={onAudioDeleteBtnClick} size={20} />
             </span>
           </div>}
           <div className={styles.messageSendOptions}>
             <img src={emojiIcon} alt="emoji" onClick={onEmojiIconClick} />
             <img src={attachIcon} alt="attach" onClick={onAddMediaClickFunc} />
 
-            <img src={send} alt="send" />
+            <img onClick={OnSendBtnClick} src={send} alt="send" />
           </div>
         </div>
       </div>

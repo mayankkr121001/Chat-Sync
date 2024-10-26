@@ -67,14 +67,14 @@
     align-items: center;
     justify-content: center;   
 }
-.storyNotSeen{
+/* .storyNotSeen{
     border: 3px solid #e84343;
     border-radius: 50%;
     
     &:hover {
         border: 3px solid #b63b3b;
     }
-}
+} */
 .storySeen{
     border: 3px solid #362a74;
     border-radius: 50%;

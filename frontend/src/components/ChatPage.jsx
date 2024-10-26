@@ -24,76 +24,20 @@ function ChatPage() {
     const [changeProfilePicOpen, setChangeProfilePicOpen] = useState(false)
     const [newChatOpen, setNewChatOpen] = useState(false)
 
-    const [messageSectionOpen, setMessageSectionOpen] = useState(true)
+    const [messageSectionOpen, setMessageSectionOpen] = useState(false)
     const [addStoryOpen, setAddStoryOpen] = useState(false)
     const [addMediaOpen, setAddMediaOpen] = useState(false)
     const [showStoryMediaOpen, setShowStoryMediaOpen] = useState(false)
 
     const [mobileView, setMobileView] = useState(false)
 
+    const [userForStory, setUserForStory] = useState();
+    const [userForMessage, setUserForMessage] = useState();
+
     const queryClient = useQueryClient();
 
     const storyDivRef = useRef(null);
 
-    useEffect(() => {
-        if (window.innerWidth < 750) {
-            setMobileView(true)
-        }
-    }, [])
-
-    useEffect(() => {
-        socket.on("connect", () => {
-            console.log("Connected", socket.id);
-        })
-        console.log(socket);
-
-        // socket.emit("message", "Checking message");
-
-        // socket.on("info", (inf)=>{
-        //     console.log(inf);
-        // })
-
-        // socket.on('disconnect', ()=>{
-        //     console.log("Disconnected", socket.id)
-        // })
-
-        return ()=>{
-            socket.off('connect')
-            socket.off('disconnect')
-        }
-    }, [])
-
-
-    useEffect(() => {
-
-        if (user?.story && user?.storySeen === false) {
-            storyDivRef.current.classList.remove(styles.profileStorySeen)
-            storyDivRef.current.classList.add(styles.profileStoryNotSeen)
-        }
-        else if (user?.story && user?.storySeen === true) {
-            storyDivRef.current.classList.remove(styles.profileStoryNotSeen)
-            storyDivRef.current.classList.add(styles.profileStorySeen)
-        }
-
-        const checkStoryExpiry = () => {
-            const createdAt = new Date(user?.storyCreatedTime);
-            const now = new Date();
-            const expiryDuration = 24 * 60 * 60 * 1000;
-
-            if (now - createdAt > expiryDuration) {
-                storyDivRef.current.classList.remove(styles.profileStoryNotSeen)
-                storyDivRef.current.classList.remove(styles.profileStorySeen)
-
-                onImgStoryClose();
-            }
-        };
-
-        checkStoryExpiry();
-
-        const interval = setInterval(checkStoryExpiry, 1 * 60 * 60 * 1000);
-
-        return () => clearInterval(interval);
-    });
 
     const { error, data: user } = useQuery({
         queryKey: ['currUser'],
@@ -103,13 +47,63 @@ function ChatPage() {
             return res.data.user;
 
         },
-        refetchInterval: 24 * 60 * 60 * 1000
+        onSuccess: (data) => {
+            // console.log(data);
+            // if (data?.story && data?.storySeen === false) {
+            if (data?.story) {
+                // storyDivRef.current?.classList.remove(styles.profileStorySeen)
+                // storyDivRef.current?.classList.add(styles.profileStoryNotSeen)
+                storyDivRef.current?.classList.add(styles.profileStorySeen)
+            }
+            // else if (data?.story && data?.storySeen === true) {
+            //     storyDivRef.current?.classList.remove(styles.profileStoryNotSeen)
+            //     storyDivRef.current?.classList.add(styles.profileStorySeen)
+            // }
+    
+            const checkStoryExpiry = () => {
+                const createdAt = new Date(data?.storyCreatedTime);
+                const now = new Date();
+                const expiryDuration = 24 * 60 * 60 * 1000;
+    
+                if (now - createdAt > expiryDuration) {
+                    // storyDivRef.current.classList.remove(styles.profileStoryNotSeen)
+                    storyDivRef.current.classList.remove(styles.profileStorySeen)
+    
+                    onImgStoryClose();
+                }
+            };
+    
+            checkStoryExpiry();
+    
+            setInterval(checkStoryExpiry, 1 * 60 * 60 * 1000);
+            
+        },
+        refetchInterval: 1 * 60 * 60 * 1000
     })
     // console.log(user);
     if (error) {
         console.log(error);
     }
 
+    useEffect(() => {
+        if (window.innerWidth < 750) {
+            setMobileView(true)
+            setMessageSectionOpen(false)
+        }
+    }, [])
+
+    useEffect(() => {
+        socket.on("connect", () => {
+            console.log("Connected", socket.id);
+        })
+ 
+        return ()=>{
+            socket.off('connect')
+            socket.off('disconnect')
+        }
+    }, [])
+
+    
 
 
     const onSettingsClickFunc = () => {
@@ -178,7 +172,7 @@ function ChatPage() {
         if (window.innerWidth < 750) {
             setChatListOpen(true)
         } else {
-            setMessageSectionOpen(true)
+            // setMessageSectionOpen(true)
         }
         setAddStoryOpen(false)
     }
@@ -199,6 +193,8 @@ function ChatPage() {
             setShowStoryMediaOpen(false)
         }
         setAddMediaOpen(!addMediaOpen)
+
+        // setUserForMessage(user)
     }
 
     const onAddMediaClose = () => {
@@ -237,8 +233,7 @@ function ChatPage() {
     }
 
 
-    const [userForStory, setUserForStory] = useState();
-    const [userForMessage, setUserForMessage] = useState();
+    
 
     const onImgStoryClick = (user) => {
         if (user?.story) {
@@ -277,7 +272,7 @@ function ChatPage() {
         if (window.innerWidth < 750) {
             setChatListOpen(true)
         } else {
-            setMessageSectionOpen(true)
+            // setMessageSectionOpen(true)
         }
         setShowStoryMediaOpen(false)
     }
@@ -307,7 +302,7 @@ function ChatPage() {
                         <div className={styles.chatSection1Div}>
                             <StorySection onAddStoryClickFunc={onAddStoryClickFunc} onImgStoryClick={onImgStoryClick} />
                             <div>
-                                {chatListOpen && <ChatList onNewChatClickFunc={onNewChatClickFunc} />}
+                                {chatListOpen && <ChatList onNewChatClickFunc={onNewChatClickFunc} onMessageSectionOpen={onMessageSectionOpen}/>}
                                 {settingsOpen && <Settings onSettingsClose={onSettingsClose} onProfileClickFunc={onProfileClickFunc} />}
                                 {profileOpen && <Profile onProfileClose={onProfileClose} onChangeProfilePicClickFunc={onChangeProfilePicClickFunc} />}
                                 {changeProfilePicOpen && <ChangeProfilePic onChangeProfilePicClose={onChangeProfilePicClose} />}
@@ -318,7 +313,7 @@ function ChatPage() {
                             {messageSectionOpen && <MessageSection userForMessage={userForMessage} onMessageSectionClose={onMessageSectionClose} onAddMediaClickFunc={onAddMediaClickFunc} />}
                             {showStoryMediaOpen && <ImageStoryShow user={userForStory} onImgStoryClose={onImgStoryClose} />}
                             {addStoryOpen && <AddStory onAddStoryClose={onAddStoryClose} />}
-                            {addMediaOpen && <AddMedia onAddMediaClose={onAddMediaClose} />}
+                            {addMediaOpen && <AddMedia userForMessage={userForMessage} onAddMediaClose={onAddMediaClose} />}
                         </div>
 
                     </div>
@@ -345,7 +340,7 @@ function ChatPage() {
                                 <StorySection onAddStoryClickFunc={onAddStoryClickFunc} onImgStoryClick={onImgStoryClick} />
                             </div>
                             <div className={styles.chatMobileSectionsComponents}>
-                                {chatListOpen && <ChatList onNewChatClickFunc={onNewChatClickFunc} />}
+                                {chatListOpen && <ChatList onNewChatClickFunc={onNewChatClickFunc} onMessageSectionOpen={onMessageSectionOpen}/>}
                                 {settingsOpen && <Settings onSettingsClickFunc={onSettingsClose} onProfileClickFunc={onProfileClickFunc} />}
                                 {profileOpen && <Profile onProfileClose={onProfileClose} onChangeProfilePicClickFunc={onChangeProfilePicClickFunc} />}
                                 {changeProfilePicOpen && <ChangeProfilePic onChangeProfilePicClose={onChangeProfilePicClose} />}
@@ -360,7 +355,7 @@ function ChatPage() {
                                 <MessageSection userForMessage={userForMessage} onMessageSectionClose={onMessageSectionClose} onAddMediaClickFunc={onAddMediaClickFunc} />
                             </div> :
                                 <div className={styles.chatMobileContainer}>
-                                    <AddMedia onAddMediaClose={onAddMediaClose} />
+                                    <AddMedia userForMessage={userForMessage} onAddMediaClose={onAddMediaClose} />
                                 </div>}
                         </>
                     }

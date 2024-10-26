@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './css modules/NewChat.module.css'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import api from '../interceptors/axios.js'
 import {socket} from '../socket/socket.js'
 import profile from '../assets/profile.png'
@@ -10,6 +10,8 @@ import { Riple } from "react-loading-indicators"
 function NewChat({ onNewChatClose, onMessageSectionOpen }) {
     const [inputSearch, setInputSearch] = useState("");
     const [filterdArray, setFilterdArray] = useState([]);
+
+    const queryClient = useQueryClient();
 
     const { isLoading, error, data: allUsers } = useQuery({
         queryKey: ['allUsers'],
@@ -42,6 +44,8 @@ function NewChat({ onNewChatClose, onMessageSectionOpen }) {
         },
         onSuccess: (data) => {
             // console.log(data);
+            queryClient.invalidateQueries("connectedUsers")
+            
         }
     })
 
@@ -51,8 +55,6 @@ function NewChat({ onNewChatClose, onMessageSectionOpen }) {
         const otherUserId = elem._id;
 
         chatRoomMutation.mutate({otherUserId})
-
-
 
     }
 
