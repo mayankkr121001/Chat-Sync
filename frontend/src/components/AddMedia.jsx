@@ -15,6 +15,7 @@ function AddMedia({ userForMessage, onAddMediaClose }) {
   const [imageFlag, setImageFlag] = useState(false);
   const [videoFlag, setVideoFlag] = useState(false);
   const [audioFlag, setAudioFlag] = useState(false);
+  const [documentFlag, setDocumentFlag] = useState(false);
 
 
   const videoRef = useRef(null);
@@ -26,26 +27,49 @@ function AddMedia({ userForMessage, onAddMediaClose }) {
     }
   }, []);
 
+
   const onMediaInput = (e) => {
     setMediaPreview(URL.createObjectURL(e.target.files[0]));
     const file = e.target.files[0];
     // console.log(file.type);
+
+    const isDocument = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'application/vnd.ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+      'text/plain',
+      'application/rtf',
+    ].includes(file?.type);
 
     if (file.type.startsWith('image/')) {
       setType('image');
       setImageFlag(true);
       setVideoFlag(false);
       setAudioFlag(false);
+      setDocumentFlag(false);
     }
     else if (file.type.startsWith('video/')) {
       setType('video')
       setVideoFlag(true);
       setImageFlag(false);
       setAudioFlag(false);
+      setDocumentFlag(false);
     }
     else if (file.type.startsWith('audio/')) {
       setType('audio')
       setAudioFlag(true);
+      setImageFlag(false);
+      setVideoFlag(false);
+      setDocumentFlag(false);
+    }
+    else if(isDocument){
+      setType('document')
+      setDocumentFlag(true);
+      setAudioFlag(false);
       setImageFlag(false);
       setVideoFlag(false);
     }

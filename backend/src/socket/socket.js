@@ -7,7 +7,7 @@ import { Message } from '../models/message.model.js';
 import { User } from '../models/user.model.js';
 import { ChatRoom } from '../models/chatRoom.model.js';
 import jwt from 'jsonwebtoken'
-import { uploadOnCloudinary } from '../utils/cloudinary.js';
+import {uploadOnCloudinary } from '../utils/cloudinary.js';
 import fs from 'fs'
 
 const io = new Server(server, {
@@ -86,7 +86,7 @@ io.on("connection", async (socket) => {
     const filePath = `./public/temp2/${filename}`;
     fs.writeFileSync(filePath, buffer);
 
-    const result = await uploadOnCloudinary(filePath)
+    const  result = await uploadOnCloudinary(filePath)
 
     // console.log(result?.secure_url);  
 

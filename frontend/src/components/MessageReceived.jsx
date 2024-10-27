@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './css modules/MessageSendReceived.module.css'
 import chatVector from '../assets/chatVector.jpg'
 import dateFormat from "dateformat";
@@ -10,7 +10,7 @@ function MessageReceived({ content, type, time }) {
   const messageTime = dateFormat(timeFormat, "shortTime");
 
   // console.log(type);
-
+  
 
   return (
     <div className={styles.messageReceivedContainer}>
@@ -32,6 +32,8 @@ function MessageReceived({ content, type, time }) {
             <source src={content} type="audio/mpeg" />
             Your browser does not support the audio tag.
           </audio>}
+
+          {type === "document" && <p>Document file -<a href={content} target="_blank">{content}</a></p>}
           
         </div>
         <div className={styles.messageReceivedTime}>{messageDate} {messageTime}</div>

@@ -60,6 +60,7 @@
     height: 100%;
     padding: 20px 10px;
     overflow-y: auto;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     background-color: var(--primaryBackgroundColor);
 }

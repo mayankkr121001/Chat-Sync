@@ -34,4 +34,4 @@ const deleteFromCloudinary = async(publicId) =>{
     }
 }
 
-export {uploadOnCloudinary, deleteFromCloudinary}
+export {cloudinary, uploadOnCloudinary, deleteFromCloudinary}
