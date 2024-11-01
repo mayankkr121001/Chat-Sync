@@ -6,7 +6,7 @@
     background-color: var(--primaryBackgroundColor);
     display: flex;
 
-     /* overflow-y: hidden; */
+     overflow-y: hidden;
     /*overflow-x: hidden; */
 }
 
@@ -230,6 +230,9 @@
 }
 
 @media screen and (max-width: 750px) {
+    .chatContainer {
+        overflow-y: auto;
+    }
     .chatProfileDotsDiv {
         width: 50px;
     }

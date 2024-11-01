@@ -250,15 +250,15 @@ const uploadProfileImage = async (req, res) => {
         }
 
         const profileImageCloudinary = await uploadOnCloudinary(profileImageLocalPath);
-        console.log(profileImageCloudinary);
+        // console.log(profileImageCloudinary);
         
 
-        if (!profileImageCloudinary.url) {
+        if (!profileImageCloudinary.secure_url) {
             return res.status(400).json({ error: "Error while uploading profile image !" })
         }
 
 
-        user.profileImage = profileImageCloudinary.url
+        user.profileImage = profileImageCloudinary.secure_url
         user.save()
 
 
@@ -362,11 +362,11 @@ const addStory = async (req, res)=>{
 
         const story  = await uploadOnCloudinary(storyLocalPath);
 
-        if (!story.url) {
+        if (!story.secure_url) {
             return res.status(400).json({ error: "Error while uploading story !" });
         }
 
-        user.story = story.url;
+        user.story = story.secure_url;
         user.storyCreatedTime = Date.now()
         await user.save();
 
