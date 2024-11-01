@@ -6,10 +6,13 @@ import { useLocation , useNavigate} from 'react-router-dom'
 function VerifyEmail() {
     const location = useLocation();
 
+    console.log('Verification ...')
+    
     const navigate = useNavigate()
     useEffect(()=>{
         const verifyEmail = async()=>{
             const token = new URLSearchParams(location.search).get('token');
+            console.log("token:", token)
             if(!token) return;
 
             try {
