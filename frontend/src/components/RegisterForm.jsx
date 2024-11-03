@@ -59,10 +59,11 @@ function RegisterForm({toLoginFunc}) {
         }, 
         onSuccess: (response)=> {
             // console.log(data);
-            setMessage(response.data.message + ". Please Verify your email before login .");
-            setTimeout(()=>{
-                setMessage("");
-            }, 3000);
+            // setMessage(response.data.message + ". Please Verify your email before login.");
+            // setTimeout(()=>{
+            //     setMessage("");
+            // }, 3000);
+            alert(response.data.message + ". You will receive a verification email , please verify your email before login.")
             setName("")
             setEmail("")
             setPassword("")
