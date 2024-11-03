@@ -7,17 +7,15 @@ import profilePic from '../assets/profile.png'
 
 function StorySection({ onAddStoryClickFunc, onImgStoryClick }) {
 
-    const { error, data: usersWithStory } = useQuery({
-        queryKey: ['usersWithStory'],
+    const { error, data: connectedUsers } = useQuery({
+        queryKey: ["connectedUsers"],
         queryFn: async () => {
-            const res = await api.get('/user/usersStories');
-            // console.log(res.data.usersWithStories);
-            return res.data.usersWithStories
-        }
+            const res = await api.get('/chatRoom/connectedUsers');
+            // console.log(res.data.otherConnectedUsers);
+            return res.data.otherConnectedUsers;
+        },
+        refetchOnMount: true
     })
-    if (error) {
-        console.log(error);
-    }
 
     const onOtherStoryClick = (user) => {
         // console.log(user);
@@ -34,8 +32,8 @@ function StorySection({ onAddStoryClickFunc, onImgStoryClick }) {
                         <img src={addStory} alt="addStory" onClick={onAddStoryClickFunc} />
                     </div>
                     <div className={styles.storiesDiv}>
-                        {usersWithStory && usersWithStory.map((elem, index) => (
-                            <div key={index} className={`${styles.storyDiv}`} onClick={() => onOtherStoryClick(elem)}>
+                        {(connectedUsers?.length > 0) && connectedUsers.map((elem, index) => (
+                            (elem?.story) && <div key={index} className={`${styles.storyDiv}`} onClick={() => onOtherStoryClick(elem)}>
                                 {elem.profileImage ? <img src={elem.profileImage} alt="profilePic" /> :
                                     <img onClick={() => onOtherStoryClick(elem)} src={profilePic} alt="profilePic" />}
                                     

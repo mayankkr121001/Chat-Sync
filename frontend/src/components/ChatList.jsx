@@ -5,7 +5,7 @@ import { useQuery } from 'react-query'
 import addContactIcon from '../assets/addContact.png'
 import profilePic from '../assets/profile.png'
 
-function ChatList({ onNewChatClickFunc, onMessageSectionOpen }) {
+function ChatList({messageSectionOpen, onNewChatClickFunc, onMessageSectionOpen }) {
 
     const connectedUsersRef = useRef([]);
 
@@ -17,8 +17,10 @@ function ChatList({ onNewChatClickFunc, onMessageSectionOpen }) {
             return res.data.otherConnectedUsers;
         },
         onSuccess: (data)=>{
-            for(let i =0; i<= data?.length - 1 ; i++){
-                connectedUsersRef.current[i]?.classList.remove(styles.chatListOpenUser)
+            if(!messageSectionOpen){
+                for(let i =0; i<= data?.length - 1 ; i++){
+                    connectedUsersRef.current[i]?.classList.remove(styles.chatListOpenUser)
+                }
             }
         }
     })

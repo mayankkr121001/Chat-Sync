@@ -49,20 +49,14 @@ function ChatPage() {
         },
         onSuccess: (data) => {
             // console.log(data);
-            // if (data?.story && data?.storySeen === false) {
             if (data?.story) {
-                // storyDivRef.current?.classList.remove(styles.profileStorySeen)
-                // storyDivRef.current?.classList.add(styles.profileStoryNotSeen)
+
                 storyDivRef.current?.classList.add(styles.profileStorySeen)
             }
             else if(!data.story){
                 storyDivRef.current?.classList.remove(styles.profileStorySeen)
             }
-            // else if (data?.story && data?.storySeen === true) {
-            //     storyDivRef.current?.classList.remove(styles.profileStoryNotSeen)
-            //     storyDivRef.current?.classList.add(styles.profileStorySeen)
-            // }
-    
+
             const checkStoryExpiry = () => {
                 const createdAt = new Date(data?.storyCreatedTime);
                 const now = new Date();
@@ -307,7 +301,7 @@ function ChatPage() {
                         <div className={styles.chatSection1Div}>
                             <StorySection onAddStoryClickFunc={onAddStoryClickFunc} onImgStoryClick={onImgStoryClick} />
                             <div>
-                                {chatListOpen && <ChatList onNewChatClickFunc={onNewChatClickFunc} onMessageSectionOpen={onMessageSectionOpen}/>}
+                                {chatListOpen && <ChatList messageSectionOpen={messageSectionOpen} onNewChatClickFunc={onNewChatClickFunc} onMessageSectionOpen={onMessageSectionOpen}/>}
                                 {settingsOpen && <Settings onSettingsClose={onSettingsClose} onProfileClickFunc={onProfileClickFunc} />}
                                 {profileOpen && <Profile onProfileClose={onProfileClose} onChangeProfilePicClickFunc={onChangeProfilePicClickFunc} />}
                                 {changeProfilePicOpen && <ChangeProfilePic onChangeProfilePicClose={onChangeProfilePicClose} />}
