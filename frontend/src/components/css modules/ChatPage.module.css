@@ -121,7 +121,7 @@
 /*------------------ Chat page for mobile ---------------- */
 .chatMobileContainer {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--primaryBackgroundColor);
 
     /* overflow-y: hidden; */
