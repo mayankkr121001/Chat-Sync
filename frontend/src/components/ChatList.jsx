@@ -50,7 +50,7 @@ function ChatList({ onNewChatClickFunc, onMessageSectionOpen }) {
                 <input type="text" placeholder='Search' />
             </div>
             <div className={styles.chatListsDiv}>
-                {connectedUsers?.map((user, index) => (
+                {(connectedUsers?.length > 0) && connectedUsers?.map((user, index) => (
                     <div key={index} onClick={() => onConnectedUserClick(user, index)} className={styles.chatList}>
                         <div ref={el => connectedUsersRef.current[index]= el} className={styles.chatListContent}>
                             <div className={styles.chatListProfilePic}>
